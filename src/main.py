@@ -1,18 +1,29 @@
+#!/usr/bin/env python
+# coding: utf-8
 # (c) 2019 lb-vr WhiteAtelier
-import discord
+import gettext
 import logging
+import os
+
+import discord
 
 from config import token
 from logic import initialize, logger
-
 from testfunc import testfunc
+
+translater = gettext.translation(
+    'vemt',
+    localedir=os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'locale')),
+    fallback=True
+)
+translater.install()
 
 client = discord.Client()
 
 
 @client.event
 async def on_connect():
-    print('Connected.')
+    print(_('Connected.'))
 
 """
 @client.event
@@ -27,41 +38,48 @@ async def on_ready():
 
 @client.event
 async def on_disconnect():
-    print('Disconnected.')
+    print(_('Disconnected.'))
 
 
 @client.event
 async def on_message(message):
     if not message.author.bot:
-        logging.getLogger().info('Message received. \n%s\nauthor id = %d', message.content, message.author.id)
+        logging.getLogger().info(
+            _('Message received. \n%(message)s\nauthor id = %(id)d')
+            % {
+                'message': message.content,
+                'id': message.author.id
+            }
+        )
 
         if message.content.startswith('+'):
             prms = message.content.split()[0].strip(' +\r\n').split(' ')
             if prms[0] == 'close':
-                await message.channel.send('Bot Closing.')
+                await message.channel.send(_('Bot Closing.'))
                 await client.close()
                 return
             elif prms[0] == 'clear-role':
                 await testfunc.clearRoles(message.guild)
-                await message.channel.send('Finished ' + message.content)
+                await message.channel.send(_('Finished %(content)s') % {'content': message.content})
             elif prms[0] == 'clear-ch':
                 await testfunc.clearChannel(message.guild)
-                await message.channel.send('Finished ' + message.content)
+                await message.channel.send(_('Finished %(content)s') % {'content': message.content})
             elif prms[0] == 'clean':
                 await testfunc.cleanDefault(message.guild)
-                await message.channel.send('Finished ' + message.content)
+                await message.channel.send(_('Finished %(content)s') % {'content': message.content})
             elif prms[0] == 'init':
                 await initialize.initializeServer(client, message)
             else:
-                await message.channel.send('コマンド「{}」は定義されていません。'.format(prms[0]))
-
+                await message.channel.send(
+                    _("No command `%(command)s`.") % {'command': prms[0]}
+                )
 
 if __name__ == "__main__":
     logger.setupLogger('vemt', logging.INFO, logging.INFO)
 
     tkn: str = token.loadTokenFromFile()
     if not tkn:
-        logging.Logger().fatal('Token string is blank.')
+        logging.getLogger().fatal(_('Token string is blank.'))
         exit(-1)
 
     print(tkn)

@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vemt-bot\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-10-02 02:34+0900\n"
+"PO-Revision-Date: 2019-10-02 02:34+0900\n"
+"Last-Translator: shigeno-y <shigeno.yoshitaka@d.nagoya-u.jp>\n"
+"Language-Team: https://github.com/lb-vr/vemt-bot\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/main.py:26
+msgid "Connected."
+msgstr "接続しました。"
+
+#: src/main.py:41
+msgid "Disconnected."
+msgstr "切断しました。"
+
+#: src/main.py:48
+#, python-format
+msgid ""
+"Message received. \n"
+"%(message)s\n"
+"author id = %(id)d"
+msgstr ""
+"メッセージを受信しました．\n"
+"%(message)s\n"
+"発言者 = %(id)d"
+
+#: src/main.py:58
+msgid "Bot Closing."
+msgstr "Botを終了します。"
+
+#: src/main.py:63 src/main.py:66 src/main.py:69
+#, python-format
+msgid "Finished %(content)s"
+msgstr "完了：%(content)s"
+
+#: src/main.py:74
+#, python-format
+msgid "No command `%(command)s`."
+msgstr "コマンド「`%(command)s`」はありません。"
+
+#: src/main.py:82
+msgid "Token string is blank."
+msgstr "Bot Tokenがありません。"
+
+#: src/logic/initialize.py:28
+msgid "Start initializing..."
+msgstr "初期化中……"
+
+#: src/logic/initialize.py:40
+#, python-format
+msgid "Role `%(name)s` already exists."
+msgstr "権限「`%(name)s`」は既に存在します。"
+
+#: src/logic/initialize.py:44
+#, python-format
+msgid "Category `%(name)s` already exists."
+msgstr "カテゴリー「`%(name)s`」は既に存在します。"
+
+#: src/logic/initialize.py:60
+#, python-format
+msgid "Role `%(name)s` has been created."
+msgstr "権限「`%(name)s`」を作成しました。"
+
+#: src/logic/initialize.py:75
+#, python-format
+msgid "Category `%(name)s` has been created."
+msgstr "カテゴリー「`%(name)s`」を作成しました。"
+
+#: src/logic/initialize.py:99
+#, python-format
+msgid "Text chat `%(name)s` has been created."
+msgstr "テキストチャット「`%(name)s`」を作成しました。"
+
+#: src/logic/initialize.py:104
+msgid "BOT does not have permission to do it."
+msgstr "BOTはそのような権限を持っていません。"
+
+#: src/logic/initialize.py:111 src/logic/initialize.py:114
+msgid "Failed to initialize Discord Server."
+msgstr "初期化に失敗しました。"
+
+#: src/testfunc/testfunc.py:14
+#, python-format
+msgid "Delete role `%(role)s`"
+msgstr "ロール「`%(role)s`」を削除します"
+
+#: src/testfunc/testfunc.py:17 src/testfunc/testfunc.py:36
+#: src/testfunc/testfunc.py:46
+msgid "... Succeed."
+msgstr "……成功。"
+
+#: src/testfunc/testfunc.py:19 src/testfunc/testfunc.py:38
+#: src/testfunc/testfunc.py:48
+msgid "... Failed."
+msgstr "……失敗。"
+
+#: src/testfunc/testfunc.py:33
+#, python-format
+msgid "Delete channel `%(name)s`"
+msgstr "チャンネル「`%(name)s`」を削除します"
+
+#: src/testfunc/testfunc.py:43
+#, python-format
+msgid "Delete category `%(name)s`"
+msgstr "カテゴリー「`%(name)s`」を削除します"
+
+#~ msgid "コマンド「%(command)s」は定義されていません。"
+#~ msgstr "コマンド「%(command)s」は定義されていません。"
+
+#~ msgid "Discordサーバーの初期化を開始します。"
+#~ msgstr "Discordサーバーの初期化を開始します。"
+
+#~ msgid "権限「%(name)s」は既に存在しています"
+#~ msgstr "権限「%(name)s」は既に存在しています"
+
+#~ msgid "カテゴリー「%(name)s」は既に存在しています"
+#~ msgstr "カテゴリー「%(name)s」は既に存在しています"
+
+#~ msgid "権限「%(name)s」を作成しました。"
+#~ msgstr "権限「%(name)s」を作成しました。"
+
+#~ msgid "カテゴリー「%(name)s」を追加しました。"
+#~ msgstr "カテゴリー「%(name)s」を追加しました。"
+
+#~ msgid "テキストチャット「%(name)s」を追加しました。"
+#~ msgstr "テキストチャット「%(name)s」を追加しました。"
+
+#~ msgid "ボットに要求された操作の権限がありません。"
+#~ msgstr "ボットに要求された操作の権限がありません。"
+
+#~ msgid "Discordサーバーの初期化に失敗しました。"
+#~ msgstr "Discordサーバーの初期化に失敗しました。"
+
+#~ msgid "Discordサーバーの初期化に成功しました。"
+#~ msgstr "Discordサーバーの初期化に成功しました。"
+
+#~ msgid "Finished {}"
+#~ msgstr "{} を完了"

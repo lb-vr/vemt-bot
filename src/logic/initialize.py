@@ -1,7 +1,6 @@
 import discord
 import logging
 from typing import Optional, List, Dict
-from logic.message import Message
 from config.server_settings import ServerSettings
 
 
@@ -26,7 +25,7 @@ async def initializeServer(client: discord.Client, message: discord.Message):
     try:
         # Starting
         logger.info('Initializing discord server.')
-        await message.channel.send(Message.start_to_initialize)
+        await message.channel.send(_('Start initializing...'))
 
         # get guild
         if not message.guild:
@@ -38,11 +37,11 @@ async def initializeServer(client: discord.Client, message: discord.Message):
         # check already exist
         for r in guild.roles:
             if r.name == ServerSettings.getBotAdminRoleName():
-                log_messages.append(str(Message.role_already_exist).format(r.name))
-                raise AlreadyInitializedError('Role has already existed.', r.name)
+                log_messages.append(_("Role `%(name)s` already exists.") % {'name': r.name})
+                raise AlreadyInitializedError('Role already exists.', r.name)
         for cat in guild.categories:
             if cat.name == ServerSettings.getBotCategoryName():
-                log_messages.append(Message.category_already_exist)
+                log_messages.append(_("Category `%(name)s` already exists.") % {'name': cat.name})
 
         # variables
         categories_list: List[discord.CategoryChannel] = guild.categories
@@ -57,7 +56,9 @@ async def initializeServer(client: discord.Client, message: discord.Message):
             await guild.create_role(
                 name=ServerSettings.getBotAdminRoleName(),
                 colour=ServerSettings.getBotAdminRoleColour())
-            log_messages.append(str(Message.created_role).format(ServerSettings.getBotAdminRoleName()))
+            log_messages.append(
+                _("Role `%(name)s` has been created.") % {'name': ServerSettings.getBotAdminRoleName()}
+            )
 
         # change 'vemt-bot' role color
         await guild.me.edit(nick='VEMT')
@@ -65,13 +66,14 @@ async def initializeServer(client: discord.Client, message: discord.Message):
         # create 'bot' category
         for cat in categories_list:
             if cat.name == kBotCategoryName:
-                logger.info('{} category has already existed.'.format(cat.name))
+                logger.info('Category {} already exists.'.format(cat.name))
                 break
         else:
             await guild.create_category(kBotCategoryName)
-            logger.info('Created %s category.', kBotCategoryName)
-            log_messages.append(str(Message.created_category).format(kBotCategoryName))
-
+            logger.info('Category %s has been created.', kBotCategoryName)
+            log_messages.append(
+                _("Category `%(name)s` has been created.") % {'name': kBotCategoryName}
+            )
         # get created 'bot' category
         bot_category = None
         categories_list = guild.categories
@@ -93,19 +95,21 @@ async def initializeServer(client: discord.Client, message: discord.Message):
             else:
                 await bot_category.create_text_channel(target)
                 logger.info('Created %s channel.', target)
-                log_messages.append(str(Message.created_text_channel).format(target))
+                log_messages.append(
+                    _("Text chat `%(name)s` has been created.") % {'name': format(target)}
+                )
 
     except discord.Forbidden as e:
         logger.exception('Initializing is forbidden.', exc_info=e)
-        await message.channel.send(Message.forbidden)
+        await message.channel.send(_('BOT does not have permission to do it.'))
         return
     except discord.HTTPException as e:
         logger.exception('Failed to initialize.', exc_info=e)
         return
     except discord.InvalidArgument as e:
         logger.exception('Program error.', exc_info=e)
-        await message.channel.send(Message.failed_to_initialize)
+        await message.channel.send(_('Failed to initialize Discord Server.'))
         return
     else:
-        log_messages.insert(0, '** {} **'.format(str(Message.succeed_to_initialize)))
+        log_messages.insert(0, _('Failed to initialize Discord Server.'))
         await message.channel.send('\n'.join(log_messages))

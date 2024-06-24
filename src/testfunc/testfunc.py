@@ -11,12 +11,12 @@ async def cleanDefault(guild: discord.Guild):
 async def clearRoles(guild: discord.Guild):
     for role in guild.roles:
         if role.name != 'developper' and not role.is_default():
-            print('Delete role ' + role.name, end='')
+            print(_('Delete role `%(role)s`') % {'role': role.name}, end='')
             try:
                 await role.delete()
-                print('... Succeed.')
+                print(_('... Succeed.'))
             except (discord.Forbidden, discord.HTTPException) as e:
-                print('... Failed.')
+                print(_('... Failed.'))
 
 
 async def clearChannel(guild: discord.Guild):
@@ -30,22 +30,22 @@ async def clearChannel(guild: discord.Guild):
     channels = guild.channels
     for ch in channels:
         if ch.name in kBotTextChannelNames and ch.category.name == kBotCategoryName:
-            print('Delete channel ' + ch.name, end='')
+            print(_('Delete channel `%(name)s`') % {'name': ch.name}, end='')
             try:
                 await ch.delete()
-                print('... Succeed.')
+                print(_('... Succeed.'))
             except (discord.Forbidden, discord.HTTPException) as e:
-                print('... Failed.')
+                print(_('... Failed.'))
 
     categories = guild.categories
     for cat in categories:
         if cat.name == kBotCategoryName:
-            print('Delete category ' + cat.name, end='')
+            print(_('Delete category `%(name)s`') % {'name': cat.name}, end='')
             try:
                 await cat.delete()
-                print('... Succeed.')
+                print(_('... Succeed.'))
             except (discord.Forbidden, discord.HTTPException) as e:
-                print('... Failed.')
+                print(_('... Failed.'))
 
 
 async def revertAccountSettings(guild: discord.guild):
